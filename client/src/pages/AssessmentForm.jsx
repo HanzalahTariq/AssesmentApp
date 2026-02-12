@@ -13,6 +13,8 @@ const AssessmentForm = () => {
     });
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
+    const [score, setScore] = useState(0);
+    const [totalQuestions, setTotalQuestions] = useState(0);
     const navigate = useNavigate();
 
     const handleInputChange = (e) => {
@@ -35,13 +37,27 @@ const AssessmentForm = () => {
             return;
         }
 
+        // Calculate Score
+        let currentScore = 0;
+        mcqs.forEach(q => {
+            if (answers[q.id] === q.correctAnswer) currentScore++;
+        });
+        trueFalseQuestions.forEach(q => {
+            // answers[q.id] is "True" or "False" strings
+            if (answers[q.id] === q.correctAnswer) currentScore++;
+        });
+
+        const total = mcqs.length + trueFalseQuestions.length;
+        setScore(currentScore);
+        setTotalQuestions(total);
+
         try {
             const payload = {
                 ...formData,
                 ...answers,
-                // Convert 'True'/'False' strings to boolean for backend if needed? or keep as is?
-                // Backend expects boolean for TF.
-                // If the value is "True", convert to true.
+                score: currentScore,
+                totalQuestions: total,
+                // Convert 'True'/'False' strings to boolean for backend if needed
                 ...Object.keys(answers).reduce((acc, key) => {
                     if (key.startsWith('tf')) {
                         acc[key] = answers[key] === 'True';
@@ -54,9 +70,6 @@ const AssessmentForm = () => {
 
             await api.post('/assessments', payload);
             setSubmitted(true);
-            setTimeout(() => {
-                // navigate('/'); // Stay or go somewhere?
-            }, 2000);
         } catch (error) {
             console.error(error);
             alert('Failed to submit assessment.');
@@ -66,8 +79,11 @@ const AssessmentForm = () => {
     if (submitted) {
         return (
             <div className="glass-card text-center animate-fade-in" style={{ padding: '4rem' }}>
-                <h2 style={{ color: 'var(--success)' }}>Assessment Submitted Successfully!</h2>
-                <p>Thank you for your participation.</p>
+                <h2 style={{ color: 'var(--success)', marginBottom: '1.5rem' }}>Assessment Submitted Successfully!</h2>
+                <div style={{ marginBottom: '2rem' }}>
+                    <p style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-main)' }}>Your Score: {score} / {totalQuestions}</p>
+                    <p>Great job! Thank you for your participation.</p>
+                </div>
                 <button className="btn btn-primary mt-4" onClick={() => { setSubmitted(false); setAnswers({}); setFormData({ name: '', department: '', employee_id: '' }); }}>
                     Take Another Assessment
                 </button>

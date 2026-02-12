@@ -41,6 +41,15 @@ const Assessment = sequelize.define('Assessment', {
     tf8: DataTypes.BOOLEAN,
     tf9: DataTypes.BOOLEAN,
     tf10: DataTypes.BOOLEAN,
+    // Scoring
+    score: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
+    totalQuestions: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    }
 }, {
     timestamps: true, // adds createdAt, updatedAt
 });
