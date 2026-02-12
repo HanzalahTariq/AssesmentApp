@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import api from '../api';
 
+import logo from '../assets/logo.jpg';
+
 const FeedbackForm = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -75,7 +77,10 @@ const FeedbackForm = () => {
 
     return (
         <div className="animate-fade-in">
-            <div className="glass-card">
+            <div className="glass-card" style={{ position: 'relative' }}>
+                <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+                    <img src={logo} alt="Logo" style={{ maxWidth: '120px', height: 'auto' }} />
+                </div>
                 <h2 className="mb-4">Participant Feedback Form</h2>
                 <p className="mb-4">Please take a moment to provide feedback on the training session.</p>
 

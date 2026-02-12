@@ -3,6 +3,8 @@ import { mcqs, trueFalseQuestions } from '../data/questions';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
 
+import logo from '../assets/logo.jpg';
+
 const AssessmentForm = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -75,7 +77,10 @@ const AssessmentForm = () => {
 
     return (
         <div className="animate-fade-in">
-            <div className="glass-card">
+            <div className="glass-card" style={{ position: 'relative' }}>
+                <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+                    <img src={logo} alt="Logo" style={{ maxWidth: '120px', height: 'auto' }} />
+                </div>
                 <h2 className="mb-4">Participant Assessment Form</h2>
                 <form onSubmit={handleSubmit}>
 
