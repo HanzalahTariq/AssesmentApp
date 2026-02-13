@@ -82,7 +82,7 @@ const AssessmentForm = () => {
                 <h2 style={{ color: 'var(--success)', marginBottom: '1.5rem' }}>Assessment Submitted Successfully!</h2>
                 <div style={{ marginBottom: '2rem' }}>
                     <p style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-main)' }}>Your Score: {score} / {totalQuestions}</p>
-                    <p>Great job! Thank you for your participation.</p>
+                    <p>Thank you for your participation.</p>
                 </div>
                 <button className="btn btn-primary mt-4" onClick={() => { setSubmitted(false); setAnswers({}); setFormData({ name: '', department: '', employee_id: '' }); }}>
                     Take Another Assessment
@@ -95,7 +95,7 @@ const AssessmentForm = () => {
         <div className="animate-fade-in">
             <div className="glass-card">
                 <div className="form-header">
-                    <h2 style={{ margin: 0 }}>Participant Assessment Form</h2>
+                    <h2 style={{ margin: 0 }}>Participant Assessment</h2>
                     <img src={logo} alt="Logo" style={{ maxWidth: '120px', height: 'auto' }} />
                 </div>
                 <form onSubmit={handleSubmit}>
