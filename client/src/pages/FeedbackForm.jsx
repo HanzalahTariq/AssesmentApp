@@ -79,7 +79,7 @@ const FeedbackForm = () => {
         <div className="animate-fade-in">
             <div className="glass-card">
                 <div className="form-header">
-                    <h2 style={{ margin: 0 }}>Participant Feedback Form</h2>
+                    <h2 style={{ margin: 0 }}>Participant Feedback</h2>
                     <img src={logo} alt="Logo" style={{ maxWidth: '120px', height: 'auto' }} />
                 </div>
                 <p className="mb-4">Please take a moment to provide feedback on the training session.</p>
