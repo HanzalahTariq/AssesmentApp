@@ -27,9 +27,9 @@ app.get(/^(?!\/api).+/, (req, res) => {
 });
 
 // Database connection and server start
-sequelize.sync()
+sequelize.sync({ alter: true })
     .then(() => {
-        console.log('Database synced');
+        console.log('Database synced with changes');
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         });
